@@ -26,9 +26,27 @@ build-backend = "hatchling.build"
 packages = ["app", "manage"]
 
 [tool.ruff]
+force-exclude = true
+line-length = 79
 namespace-packages = ["migrations"]
+preview = true
+
+[tool.ruff.format]
+docstring-code-format = true
+line-ending = "lf"
+quote-style = "single"
 
 [tool.ruff.lint]
+ignore = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107", # Disable enforcing docstrings comments
+]
 select = [
     "ERA",    # Comments
     "FAST",   # FastAPI
@@ -63,10 +81,22 @@ select = [
     "I",      # Import sort
     "C90",    # Lint complexity
     "N",      # Naming rules
+    "PERF",   # Perfomance rules
     "E",      # Pycodestyle errors
     "W",      # Pycodestyle warrnings
+    "DOC",    # Linting docstrings
+    "D",      # Docstring style rules
+    "F",      # Pyflakes rules
+    "PGH",    # Disallow empty ignore comments
+    "PL",     # Pylint rules
+    "UP",     # Pyupgrade rules
+    "FURB",   # Refactoring rules
+    "RUF",    # Ruff rules
+    "TRY",    # Exception handling rules
 ]
-preview = true
+unfixable = [
+    "F401", # Disable auto-fix for unused imports
+]
 
 [tool.ruff.lint.per-file-ignores]
 "app/core/config.py" = [
@@ -81,3 +111,12 @@ ban-relative-imports = "all"
 
 [tool.ruff.lint.pep8-naming]
 classmethod-decorators = ["directive"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 6
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+allow-dunder-method-names = ["__tablename__"]

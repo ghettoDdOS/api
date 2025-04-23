@@ -1,8 +1,7 @@
 from fastapi import UploadFile
 from pydantic import EmailStr
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import Mapped, mapped_column, validates
-from sqlalchemy.sql import select
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.db import Base, DatabaseSession
 from app.core.models import BaseModel
@@ -12,7 +11,7 @@ from app.core.types import FSSpecField
 class UserModel(Base):
     email: Mapped[str] = mapped_column(unique=True)
     avatar: Mapped[str | None] = mapped_column(
-        FSSpecField(upload_to="users/avatars/%d/")
+        FSSpecField(upload_to='users/avatars/%d/')
     )
 
 

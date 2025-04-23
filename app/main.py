@@ -13,6 +13,10 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-app.mount(settings.MEDIA_URL, StaticFiles(directory=settings.MEDIA_ROOT), name="media")
+app.mount(
+    settings.MEDIA_URL,
+    StaticFiles(directory=settings.MEDIA_ROOT),
+    name='media',
+)
 
-app.include_router(api_router, prefix="/api")
+app.include_router(api_router, prefix='/api')

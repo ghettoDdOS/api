@@ -1,6 +1,6 @@
 import shutil
 from pathlib import Path
-from typing import BinaryIO, List
+from typing import BinaryIO
 
 from app.core.config import settings
 
@@ -21,12 +21,12 @@ class FileSystemStorage:
         return self.location / name
 
     def url(self, name: str) -> str:
-        return f"{self.base_url}/{name}"
+        return f'{self.base_url}/{name}'
 
     def save(self, name: str, content: BinaryIO) -> None:
         path = self.path(name)
         path.parent.mkdir(parents=True, exist_ok=True)
-        with path.open("wb") as output:
+        with path.open('wb') as output:
             content.seek(0)
             while True:
                 chunk = content.read(DEFAULT_CHUNK_SIZE)
@@ -35,7 +35,7 @@ class FileSystemStorage:
                 output.write(chunk)
 
     def open(self, name: str) -> BinaryIO:
-        with self.path(name).open("rb") as content:
+        with self.path(name).open('rb') as content:
             return content
 
     def delete(self, name: str) -> None:

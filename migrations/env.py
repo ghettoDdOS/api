@@ -15,7 +15,7 @@ logging.basicConfig()
 
 config = context.config
 
-config.set_main_option("sqlalchemy.url", str(settings.DATABASE_URL))
+config.set_main_option('sqlalchemy.url', str(settings.DATABASE_URL))
 
 target_metadata = Base.metadata
 
@@ -33,7 +33,7 @@ def do_run_migrations(connection: Connection) -> None:
 async def run_async_migrations() -> None:
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
+        prefix='sqlalchemy.',
         poolclass=pool.NullPool,
     )
 
@@ -48,6 +48,6 @@ def run_migrations_online() -> None:
 
 
 if context.is_offline_mode():
-    logger.error("Only offline migrations supported!")
+    logger.error('Only offline migrations supported!')
 else:
     run_migrations_online()

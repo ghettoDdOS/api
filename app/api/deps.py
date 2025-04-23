@@ -1,4 +1,4 @@
-from typing import Annotated, get_type_hints
+from typing import Annotated
 
 from fastapi import Depends
 from pydantic import BaseModel
@@ -20,4 +20,6 @@ def provide_limit_offset_pagination(
     return LimitOffset(limit=limit, offset=offset)
 
 
-LimitOffsetPagination = Annotated[LimitOffset, Depends(provide_limit_offset_pagination)]
+LimitOffsetPagination = Annotated[
+    LimitOffset, Depends(provide_limit_offset_pagination)
+]

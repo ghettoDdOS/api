@@ -6,25 +6,25 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class _Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_prefix="FASTAPI_",
+        env_prefix='FASTAPI_',
         case_sensitive=True,
-        env_file=".env",
-        env_file_encoding="utf-8",
-        extra="ignore",
+        env_file='.env',
+        env_file_encoding='utf-8',
+        extra='ignore',
     )
 
-    POSTGRES_USER: str = "postgres"
+    POSTGRES_USER: str = 'postgres'
     POSTGRES_PASSWORD: str | None = None
-    POSTGRES_DB: str = "postgres"
+    POSTGRES_DB: str = 'postgres'
 
-    DATABASE_HOST: str = "localhost"
+    DATABASE_HOST: str = 'localhost'
     DATABASE_PORT: int = 5432
 
     @computed_field
     @property
     def DATABASE_URL(self) -> PostgresDsn:
         return PostgresDsn.build(
-            scheme="postgresql+asyncpg",
+            scheme='postgresql+asyncpg',
             username=self.POSTGRES_USER,
             password=self.POSTGRES_PASSWORD,
             host=self.DATABASE_HOST,
@@ -34,12 +34,12 @@ class _Settings(BaseSettings):
 
     BASE_DIR: Path = Path(__file__).parent.parent.parent
 
-    MEDIA_URL: str = "/media"
+    MEDIA_URL: str = '/media'
 
     @computed_field
     @property
     def MEDIA_ROOT(self) -> Path:
-        return self.BASE_DIR / "media"
+        return self.BASE_DIR / 'media'
 
 
 settings = _Settings()
